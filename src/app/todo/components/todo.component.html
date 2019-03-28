@@ -1,0 +1,48 @@
+<app-todo-create-form (todoCreated)="onTodoCreated($event)"></app-todo-create-form>
+<ul class="task-block">
+  <li class="task-block__item" *ngFor="let todo of uncompletedTodoList">
+    <label class="checkbox-custom">
+      <input type="checkbox" [checked]="todo.completed" (change)="completeToggle(todo)">
+      <div class="checkbox-custom_checkmark"></div>
+    </label>
+    <span>{{todo.text}}</span>
+    <div class="task-block__item-info">
+      <div class="task-block__item_date">
+        {{todo.createdAt | date:"dd.MM.yyyy" }}
+      </div>
+      <div class="task-block__item_star" (click)="starToggle(todo)" [class.task-block__item_disabled]="!todo.important" title="{{starTitle}}">
+          <fa-icon [icon]="faStar"></fa-icon>
+      </div>
+      <div class="task-block__item_trash" (click)="removeTodo(todo)">
+        <fa-icon [icon]="faTrash"></fa-icon>
+      </div>
+    </div>
+  </li>
+</ul>
+<h3 class="header-small">
+  <a href="#" class="header-small__link">Show ended tasks</a>
+</h3>
+<ul class="task-block task-block_ended">
+  <li class="task-block__item" *ngFor="let todo of completedTodoList">
+    <label class="checkbox-custom">
+      <input type="checkbox" [checked]="todo.completed" (change)="completeToggle(todo)">
+      <div class="checkbox-custom_checkmark"></div>
+    </label>
+    <span>{{todo.text}}</span>
+    <div class="task-block__item-info">
+      <div class="task-block__item_date">
+        {{todo.createdAt | date:"dd.MM.yyyy" }}
+      </div>
+      <div class="task-block__item_star" (click)="starToggle(todo)">
+        <fa-icon [icon]="faStar"></fa-icon>
+      </div>
+      <div class="task-block__item_trash" (click)="removeTodo(todo)">
+        <fa-icon [icon]="faTrash"></fa-icon>
+      </div>
+    </div>
+  </li>
+</ul>
+
+
+
+

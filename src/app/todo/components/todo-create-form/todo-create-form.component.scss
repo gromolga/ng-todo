@@ -1,0 +1,42 @@
+.new-task__block {
+    position: relative;
+}
+
+.new-task__input {
+    width: 100%;
+    margin: 10px auto;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background: rgba(102,152,68,0.75);
+    border: none;
+    outline: none;
+    color: #fff;
+}
+
+.new-task__input::-moz-placeholder {color: #fff;}
+.new-task__input::-webkit-input-placeholder { color: #fff; }
+.new-task__input:-ms-input-placeholder { color: #fff; }
+.new-task__input::-ms-input-placeholder { color: #fff; }
+.new-task__input::placeholder { color: #fff; } 
+
+.new-task__icons {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    padding: 0 10px;
+    > * {
+        margin: 5px;
+        color: #fff;
+    }
+    .new-task__icons_active {
+        color: orange;
+    }
+    fa-icon {
+        cursor: pointer;
+    }
+}
+
+.new-task__icons_active {
+    color: orange;
+}

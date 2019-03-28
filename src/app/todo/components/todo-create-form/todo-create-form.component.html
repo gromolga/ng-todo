@@ -1,0 +1,10 @@
+<div class="new-task__block">
+  <div class="new-task__icons">
+    <fa-icon [icon]="faCalendar"></fa-icon>
+    <fa-icon [icon]="faStar" (click)="newTaskIconActive()" [class.new-task__icons_active]="newTaskIconStatus"></fa-icon>
+  </div>
+  <form (submit)="createNewTask()">
+    <input class="new-task__input" type="text" placeholder="Create task" [(ngModel)]="newTaskText" name="task">
+  </form>
+  <app-modal [content]="errorMsg" *ngIf="errorMsg" (close)="clearError()"></app-modal>
+</div>
