@@ -6,18 +6,20 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { TodoCreateFormComponent } from './todo-create-form/todo-create-form.component'
 import { ModalComponent } from 'src/app/components/modal/modal.component';
+import { TodoListComponent } from './todo-list/todo-list.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    TodoRoutes,
-    FontAwesomeModule,
-    FormsModule
-  ],
-  declarations: [
-    TodoComponent,
-    TodoCreateFormComponent,
-    ModalComponent
-  ]
+   imports: [
+      CommonModule,
+      TodoRoutes,
+      FontAwesomeModule,
+      FormsModule
+   ],
+   declarations: [
+      TodoComponent,
+      TodoCreateFormComponent,
+      ModalComponent,
+      TodoListComponent
+   ]
 })
 export class TodoModule { }

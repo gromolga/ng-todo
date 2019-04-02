@@ -19,8 +19,6 @@ export class TodoComponent implements OnInit {
 
   public todoList:Array<ITodoItem> = [];
 
-  public starTitle = "Mark with a star"
-
   public get uncompletedTodoList() {
     return this.todoList.filter(todo => !todo.completed);
   }
@@ -32,11 +30,6 @@ export class TodoComponent implements OnInit {
   starToggle(todo:ITodoItem) {
     todo.important = !todo.important;
     this.saveInLocalstorage();
-    if(this.starTitle === "Mark with a star") {
-      this.starTitle = "Remove star"
-    } else {
-      this.starTitle = "Mark with a star"
-    }
   }
 
   constructor() {}
@@ -63,7 +56,8 @@ export class TodoComponent implements OnInit {
   }
 
   removeTodo(todo) {
-    this.todoList = this.todoList.filter(item => item !== todo)
+    this.todoList = this.todoList.filter(item => item !== todo);
+    this.saveInLocalstorage();
   }
 
 }

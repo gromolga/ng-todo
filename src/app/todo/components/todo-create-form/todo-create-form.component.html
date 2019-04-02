@@ -6,5 +6,8 @@
   <form (submit)="createNewTask()">
     <input class="new-task__input" type="text" placeholder="Create task" [(ngModel)]="newTaskText" name="task">
   </form>
-  <app-modal [content]="errorMsg" *ngIf="errorMsg" (close)="clearError()"></app-modal>
+  <app-modal *ngIf="errorMsg" (close)="clearError()">
+    <h1>Error Validation <span (click)="clearError()">X</span></h1>
+    <p>{{errorMsg}}</p>
+  </app-modal>
 </div>
