@@ -23,6 +23,7 @@
     "@fortawesome/angular-fontawesome": "^0.3.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.17",
     "@fortawesome/free-solid-svg-icons": "^5.8.1",
+    "@ng-select/ng-select": "^2.16.3",
     "angular2-indexeddb": "^1.2.3",
     "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",

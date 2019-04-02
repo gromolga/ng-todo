@@ -6,13 +6,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { TodoCreateFormComponent } from './todo-create-form/todo-create-form.component'
 import { ModalComponent } from 'src/app/components/modal/modal.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   imports: [
     CommonModule,
     TodoRoutes,
     FontAwesomeModule,
-    FormsModule
+    FormsModule,
+    NgSelectModule
   ],
   declarations: [
     TodoComponent,

@@ -1,3 +1,18 @@
+<div class="title">
+    <h1 class="title-header">Incoming messages</h1>
+    <div class="sort-list">
+      <ng-select [items]="items" bindLabel="name" placeholder="Sorting"> 
+        <ng-template ng-option-tmp let-item="item" let-index="index">
+            <fa-icon [icon]="item.faClass"></fa-icon>
+            <span>{{item.name}}</span>
+        </ng-template>
+        <ng-template ng-label-tmp let-item="item">
+          <fa-icon [icon]="item.faClass"></fa-icon>
+          <span>{{item.name}}</span>
+        </ng-template>
+      </ng-select>
+    </div>
+</div>
 <app-todo-create-form (todoCreated)="onTodoCreated($event)"></app-todo-create-form>
 <ul class="task-block">
   <li class="task-block__item" *ngFor="let todo of uncompletedTodoList">
@@ -33,7 +48,7 @@
       <div class="task-block__item_date">
         {{todo.createdAt | date:"dd.MM.yyyy" }}
       </div>
-      <div class="task-block__item_star" (click)="starToggle(todo)">
+      <div class="task-block__item_star" [class.task-block__item_disabled]="!todo.important">
         <fa-icon [icon]="faStar"></fa-icon>
       </div>
       <div class="task-block__item_trash" (click)="removeTodo(todo)">
@@ -42,7 +57,3 @@
     </div>
   </li>
 </ul>
-
-
-
-

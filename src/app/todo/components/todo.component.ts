@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { faCalendar, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { 
+  faCalendar,
+  faStar,
+  faTrash,
+  faSort,
+  faSortAlphaDown,
+  faCalendarAlt,
+  faCheck
+ } from '@fortawesome/free-solid-svg-icons';
 import { ITodoItem } from '../models/ITodoItem'
+
 
 @Component({
   selector: 'app-todo',
@@ -14,6 +21,18 @@ export class TodoComponent implements OnInit {
   public faCalendar = faCalendar;
   public faStar = faStar;
   public faTrash = faTrash;
+  public faSort = faSort;
+  public faSortAlphaDown = faSortAlphaDown;
+  public faCalendarAlt = faCalendarAlt;
+  public faCheck = faCheck;
+
+  items = [
+    {id: 1, name: 'Sorting', faClass: faSort},
+    {id: 2, name: 'alphabetically', faClass: faSortAlphaDown},
+    {id: 3, name: 'by creation date', faClass: faCalendarAlt},
+    {id: 3, name: 'by execution date', faClass: faCheck},
+    {id: 3, name: 'in importance', faClass: faStar}
+  ];
 
   public starToggleStatus:boolean = true;
 
