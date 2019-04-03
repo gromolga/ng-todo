@@ -3,34 +3,22 @@
     padding: 0;
 }
 
-.sort-list {
-    .ng-select {
-        min-width: 200px;
-    }
-
-    .ng-fa-icon {
-        margin-right: 10px;
-    }
-}
-
-.sort-list_item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .task-block__item {
     position: relative;
     list-style: none;
     margin: 2px auto;
-    padding: 10px 10px 10px 40px;
+    padding: 10px 135px 10px 40px;
     border-radius: 5px;
     box-sizing: border-box;
     border: 1px solid rgba(102,152,68,0.75);
 }
 
 .task-block__item-info {
-    padding: 0 -5px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0 10px;
     > * {
         display: inline-block;
         margin: 0 5px;
@@ -67,6 +55,7 @@
     border-bottom: 5px solid #fff;
 }
 
+
 .task-block__item_disabled {
     background-color: transparent;
     fa-icon {
@@ -96,3 +85,19 @@
         text-decoration: none;
     }
 } 
+@media (min-width: 576px) {
+    .task-block__item {
+        padding: 10px 160px 10px 40px;
+    }
+
+    .task-block__item-info {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        padding: 0 10px;
+        > * {
+            margin: 0 5px;
+        }
+    }    
+}

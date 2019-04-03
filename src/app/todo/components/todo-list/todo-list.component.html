@@ -1,0 +1,24 @@
+<ul class="task-block">
+  <li class="task-block__item" *ngFor="let todo of todoList">
+    <label class="checkbox-custom">
+      <input type="checkbox" [checked]="todo.completed" (change)="completeToggle.emit(todo)">
+      <div class="checkbox-custom_checkmark"></div>
+    </label>
+    <span>{{todo.text | titlecase}}</span>
+    <div class="task-block__item-info">
+      <div class="task-block__item_date">
+        {{todo.createdAt | date:"dd.MM.yyyy" }}
+      </div>
+      <div class="task-block__item_star" 
+        (click)="starToggle.emit(todo)" 
+        [class.task-block__item_disabled]="!todo.important" 
+        [title]="todo.important ? 'Remove star' : 'Mark with a star'">
+          <fa-icon [icon]="faStar"></fa-icon>
+      </div>
+      <div class="task-block__item_trash" 
+        (click)="removeTodo.emit(todo)">
+        <fa-icon [icon]="faTrash"></fa-icon>
+      </div>
+    </div>
+  </li>
+</ul>

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-modal',
@@ -9,7 +9,6 @@ export class ModalComponent {
 
   public popupDisabled:boolean = false;
 
-  @Input() public content:string = 'Default content';
   @Output() close = new EventEmitter<void>();
 
   popupHide() {

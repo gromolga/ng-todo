@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { TodoCreateFormComponent } from './todo-create-form/todo-create-form.component'
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { TodoListComponent } from './todo-list/todo-list.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
   declarations: [
     TodoComponent,
     TodoCreateFormComponent,
-    ModalComponent
+    ModalComponent,
+    TodoListComponent
   ]
 })
+
 export class TodoModule { }
