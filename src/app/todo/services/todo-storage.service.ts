@@ -27,6 +27,15 @@ export class TodoStorageService {
     )
   }
 
+  public toggleComleted(todo: ITodoItem):Observable<ITodoItem> {
+    return this.httpClient
+    .patch("https://todo-api.grom-dev.kh.ua/api/todos/" + todo.id, {
+      completed: !todo.completed
+    }).pipe(
+      map(this.mapTodo)
+    )
+  }
+
   public remove(id: Number): Observable<any> {
     return this.httpClient
     .delete("https://todo-api.grom-dev.kh.ua/api/todos/" + id)

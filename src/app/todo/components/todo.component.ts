@@ -46,7 +46,12 @@ export class TodoComponent implements OnInit {
   }
 
   public completeToggle(todo: ITodoItem) {
-    todo.completed = !todo.completed;
+    this.todoStorage.toggleComleted(todo)
+    .subscribe((updatedTodo: ITodoItem) => {
+      this.todoList = this.todoList.map((todo) => {
+        return todo.id === updatedTodo.id ? updatedTodo : todo
+      });
+    })
   }
 
   public ngOnInit() {
