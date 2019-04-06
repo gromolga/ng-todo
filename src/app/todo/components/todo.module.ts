@@ -9,6 +9,7 @@ import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { HttpClientModule } from  '@angular/common/http';
+import { TodoStorageService } from '../services/todo-storage.service';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { HttpClientModule } from  '@angular/common/http';
     TodoCreateFormComponent,
     ModalComponent,
     TodoListComponent
-  ]
+  ],
+  providers: [TodoStorageService]
 })
 
 export class TodoModule { }

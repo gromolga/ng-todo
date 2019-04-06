@@ -9,8 +9,7 @@ import {
   faCheck
  } from '@fortawesome/free-solid-svg-icons';
 import { ITodoItem } from '../models/ITodoItem';
-import { HttpClient } from  "@angular/common/http";
-import { Observable } from 'rxjs';
+import { TodoStorageService } from '../services/todo-storage.service';
 
 @Component({
   selector: 'app-todo',
@@ -93,7 +92,9 @@ export class TodoComponent implements OnInit {
     this.sortId = $event.id;
   }
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(
+    private todoStorage: TodoStorageService
+  ) {}
 
   completeToggle(todo:ITodoItem) {
     todo.completed = !todo.completed;
@@ -104,12 +105,8 @@ export class TodoComponent implements OnInit {
     localStorage.setItem("todo-list", JSON.stringify(this.todoList));
   }
 
-  todoObservable: Observable<any>
-
   ngOnInit() {
-    this.todoObservable = this.httpClient
-    .get("https://todo-api.grom-dev.kh.ua/api/todos/");
-    this.todoObservable.subscribe((todoList)=>{
+    this.todoStorage.getTodoListObservable.subscribe((todoList)=>{
       this.todoList = todoList.map(this.mapTodo)
     })
   }
