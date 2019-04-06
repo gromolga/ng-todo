@@ -27,6 +27,11 @@ export class TodoStorageService {
     )
   }
 
+  public remove(id: Number): Observable<any> {
+    return this.httpClient
+    .delete("https://todo-api.grom-dev.kh.ua/api/todos/" + id)
+  }
+
   private mapTodoList = (todoList): Array<ITodoItem> => {
     return todoList.map(this.mapTodo);
   }

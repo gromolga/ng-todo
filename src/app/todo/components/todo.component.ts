@@ -39,7 +39,6 @@ export class TodoComponent implements OnInit {
   public starToggle(todo:ITodoItem) {
     todo.important = !todo.important;
     todo.updatedAt = Date.now();
-    this.saveInLocalstorage();
   }
 
   public onSortChanged(sortOption: SortOption) {
@@ -48,11 +47,6 @@ export class TodoComponent implements OnInit {
 
   public completeToggle(todo: ITodoItem) {
     todo.completed = !todo.completed;
-    this.saveInLocalstorage();
-  }
-
-  public saveInLocalstorage():void {
-    localStorage.setItem("todo-list", JSON.stringify(this.todoList));
   }
 
   public ngOnInit() {
@@ -67,8 +61,10 @@ export class TodoComponent implements OnInit {
   }
 
   public removeTodo(todo: ITodoItem) {
-    this.todoList = this.todoList.filter(item => item !== todo);
-    this.saveInLocalstorage();
+    this.todoStorage.remove(todo.id)
+    .subscribe(() => {
+      this.todoList = this.todoList.filter(item => item !== todo);
+    })
   }
 }
 
