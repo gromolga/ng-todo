@@ -8,8 +8,9 @@ import {
   faCalendarAlt,
   faCheck
  } from '@fortawesome/free-solid-svg-icons';
-import { ITodoItem } from '../models/ITodoItem'
-
+import { ITodoItem } from '../models/ITodoItem';
+import { HttpClient } from  "@angular/common/http";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-todo',
@@ -92,7 +93,7 @@ export class TodoComponent implements OnInit {
     this.sortId = $event.id;
   }
 
-  constructor() {}
+  constructor(private httpClient: HttpClient) { }
 
   completeToggle(todo:ITodoItem) {
     todo.completed = !todo.completed;
@@ -103,10 +104,24 @@ export class TodoComponent implements OnInit {
     localStorage.setItem("todo-list", JSON.stringify(this.todoList));
   }
 
+  todoObservable: Observable<any>
+
   ngOnInit() {
-    const todoList:Array<ITodoItem> = JSON.parse(localStorage.getItem("todo-list"));
-    if (todoList) {
-      this.todoList = todoList;
+    this.todoObservable = this.httpClient
+    .get("https://todo-api.grom-dev.kh.ua/api/todos/");
+    this.todoObservable.subscribe((todoList)=>{
+      this.todoList = todoList.map(this.mapTodo)
+    })
+  }
+
+  mapTodo(todo):ITodoItem {
+    return {
+      id: todo.id,
+      text: todo.text,
+      completed: todo.completed,
+      important: false,
+      createdAt: todo.created_at,
+      updatedAt: todo.updated_at
     }
   }
 

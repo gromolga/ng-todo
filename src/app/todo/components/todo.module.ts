@@ -8,6 +8,7 @@ import { TodoCreateFormComponent } from './todo-create-form/todo-create-form.com
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TodoListComponent } from './todo-list/todo-list.component';
+import { HttpClientModule } from  '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { TodoListComponent } from './todo-list/todo-list.component';
     TodoRoutes,
     FontAwesomeModule,
     FormsModule,
-    NgSelectModule
+    NgSelectModule,
+    HttpClientModule
   ],
   declarations: [
     TodoComponent,
