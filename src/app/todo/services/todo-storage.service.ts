@@ -24,8 +24,8 @@ export class TodoStorageService {
         text: todo.text,
         completed: todo.completed,
         important: false,
-        createdAt: todo.created_at,
-        updatedAt: todo.updated_at
+        createdAt: todo.created_at * 1000,
+        updatedAt: todo.updated_at * 1000
       }
     });
   }

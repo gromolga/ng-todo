@@ -1,15 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { 
-  faCalendar,
-  faStar,
-  faTrash,
-  faSort,
-  faSortAlphaDown,
-  faCalendarAlt,
-  faCheck
- } from '@fortawesome/free-solid-svg-icons';
 import { ITodoItem } from '../models/ITodoItem';
 import { TodoStorageService } from '../services/todo-storage.service';
+import { SortableService, SortOption } from '../services/sortable.service';
 
 @Component({
   selector: 'app-todo',
@@ -18,108 +10,66 @@ import { TodoStorageService } from '../services/todo-storage.service';
 })
 
 export class TodoComponent implements OnInit {
-  public faCalendar = faCalendar;
-  public faStar = faStar;
-  public faTrash = faTrash;
-  public faSort = faSort;
-  public faSortAlphaDown = faSortAlphaDown;
-  public faCalendarAlt = faCalendarAlt;
-  public faCheck = faCheck;
 
-  items = [
-    {id: 'none', name: 'Sorting', faClass: faSort},
-    {id: 'alphabet', name: 'alphabetically', faClass: faSortAlphaDown},
-    {id: 'creationDate', name: 'by creation date', faClass: faCalendarAlt},
-    {id: 'executionDate', name: 'by execution date', faClass: faCheck},
-    {id: 'inImportance', name: 'in importance', faClass: faStar}
-  ];
+  public items: Array<SortOption> = this.sortableService.sortOption;
 
   public starToggleStatus:boolean = true;
 
   public todoList:Array<ITodoItem> = [];
 
-  public get sorted() {
-    if (this.sortId === "alphabet") {
-      return this.todoList.sort(
-        (a, b) => {
-          var textA = a.text.toLowerCase(), textB = b.text.toLowerCase()
-          if (textA > textB) 
-            return -1
-          else if (textA < textB)
-            return 1
-          return 0 
-          }
-      );
-    } else if (this.sortId === "creationDate") {
-      return this.todoList.sort(
-        (a, b) => {
-          return b.createdAt - a.createdAt
-        }
-      )
-    } else if (this.sortId === "executionDate") {
-      return this.todoList.sort(
-        (a, b) => {
-          return b.updatedAt - a.updatedAt
-        }
-      )
-    } else if (this.sortId === "inImportance") {
-      return this.todoList.sort(
-        (a, b) => {
-          return +b.important - +a.important
-        }
-      )
-    }
-    return this.todoList;
+  public sortId: String = '';
+
+  constructor(
+    private todoStorage: TodoStorageService,
+    private sortableService: SortableService
+  ) {}
+
+  public get sorted(): Array<ITodoItem> {
+    return this.sortableService.sorting(this.todoList, this.sortId)
   }
 
-  public get uncompletedTodoList() {
+  public get uncompletedTodoList(): Array<ITodoItem> {
     return this.sorted.filter(todo => !todo.completed);
   }
 
-  public get completedTodoList() {
+  public get completedTodoList(): Array<ITodoItem> {
     return this.sorted.filter(todo => todo.completed);
   }
 
-  public sortId = '';
-
-  starToggle(todo:ITodoItem) {
+  public starToggle(todo:ITodoItem) {
     todo.important = !todo.important;
     todo.updatedAt = Date.now();
     this.saveInLocalstorage();
   }
 
-  onSortChanged($event) {
-    this.sortId = $event.id;
+  public onSortChanged(sortOption: SortOption) {
+    this.sortId = sortOption.id;
   }
 
-  constructor(
-    private todoStorage: TodoStorageService
-  ) {}
-
-  completeToggle(todo:ITodoItem) {
+  public completeToggle(todo: ITodoItem) {
     todo.completed = !todo.completed;
     this.saveInLocalstorage();
   }
 
-  saveInLocalstorage():void {
+  public saveInLocalstorage():void {
     localStorage.setItem("todo-list", JSON.stringify(this.todoList));
   }
 
-  ngOnInit() {
-    this.todoStorage.getTodoListObservable.subscribe(todoList => {
+  public ngOnInit() {
+    this.todoStorage.getTodoListObservable
+    .subscribe((todoList: Array<ITodoItem>) => {
       this.todoList = todoList;
     })
   }
 
-  onTodoCreated(todo:ITodoItem) {
+  public onTodoCreated(todo: ITodoItem) {
     this.todoList.push(todo);
     this.saveInLocalstorage();
   }
 
-  removeTodo(todo) {
+  public removeTodo(todo: ITodoItem) {
     this.todoList = this.todoList.filter(item => item !== todo);
     this.saveInLocalstorage();
   }
 }
-
 
