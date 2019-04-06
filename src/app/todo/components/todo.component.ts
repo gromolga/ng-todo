@@ -64,7 +64,6 @@ export class TodoComponent implements OnInit {
 
   public onTodoCreated(todo: ITodoItem) {
     this.todoList.push(todo);
-    this.saveInLocalstorage();
   }
 
   public removeTodo(todo: ITodoItem) {

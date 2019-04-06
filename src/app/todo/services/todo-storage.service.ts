@@ -13,21 +13,33 @@ export class TodoStorageService {
     this.getTodoListObservable = this.httpClient
     .get("https://todo-api.grom-dev.kh.ua/api/todos/")
     .pipe(
-      map(this.mapTodo)
+      map(this.mapTodoList)
     );
   }
 
-  private mapTodo(todoList): Array<ITodoItem> {
-    return todoList.map(todo => {
-      return {
-        id: todo.id,
-        text: todo.text,
-        completed: todo.completed,
-        important: false,
-        createdAt: todo.created_at * 1000,
-        updatedAt: todo.updated_at * 1000
-      }
-    });
+  public create(text: String): Observable<ITodoItem> {
+    return this.httpClient
+    .post("https://todo-api.grom-dev.kh.ua/api/todos/", {
+      text,
+      completed: 0
+    }).pipe(
+      map(this.mapTodo)
+    )
+  }
+
+  private mapTodoList = (todoList): Array<ITodoItem> => {
+    return todoList.map(this.mapTodo);
+  }
+
+  public mapTodo(todo): ITodoItem {
+    return {
+      id: todo.id,
+      text: todo.text,
+      completed: todo.completed,
+      important: false,
+      createdAt: todo.created_at * 1000,
+      updatedAt: todo.updated_at * 1000
+    }
   }
 }
 

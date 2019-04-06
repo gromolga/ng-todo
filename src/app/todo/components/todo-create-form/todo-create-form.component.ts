@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { ITodoItem } from '../../models/ITodoItem';
+import { TodoStorageService } from '../../services/todo-storage.service';
 
 @Component({
   selector: 'app-todo-create-form',
@@ -16,6 +17,8 @@ export class TodoCreateFormComponent {
   public newTaskText:string = "";
   public errorMsg = "";
 
+  constructor(private todoStorage: TodoStorageService) {}
+
   newTaskIconActive() {
     this.newTaskIconStatus = !this.newTaskIconStatus;
   }
@@ -24,15 +27,16 @@ export class TodoCreateFormComponent {
 
   createNewTask() {
     if(this.newTaskText.length >= 5) {
-      this.todoCreated.emit({
-        id: Date.now() * 10 + Math.floor(Math.random() * 10),
-        text: this.newTaskText,
-        completed: false,
-        important: this.newTaskIconStatus,
-        createdAt: Date.now(),
-        updatedAt: Date.now()
-      });
-      this.newTaskIconStatus = false;
+      this.todoStorage.create(this.newTaskText)
+      .subscribe(
+        (todo: ITodoItem) => {
+          this.todoCreated.emit(todo);
+          this.errorMsg = "";
+          this.newTaskText = "";
+          this.newTaskIconStatus = false;
+        },
+        error => console.log(error)
+      )
     } else {
       this.errorMsg = "It's can be more then 5 symbols";
     }
