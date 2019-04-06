@@ -106,20 +106,9 @@ export class TodoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.todoStorage.getTodoListObservable.subscribe((todoList)=>{
-      this.todoList = todoList.map(this.mapTodo)
+    this.todoStorage.getTodoListObservable.subscribe(todoList => {
+      this.todoList = todoList;
     })
-  }
-
-  mapTodo(todo):ITodoItem {
-    return {
-      id: todo.id,
-      text: todo.text,
-      completed: todo.completed,
-      important: false,
-      createdAt: todo.created_at,
-      updatedAt: todo.updated_at
-    }
   }
 
   onTodoCreated(todo:ITodoItem) {
