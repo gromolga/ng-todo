@@ -64,6 +64,14 @@
   text-align: center;
 }
 
+.btn-layer {
+  margin: -5px auto;
+  padding: 15px;
+  text-align: center;
+  button {
+    margin: 5px;
+  }
+}
 
 @media (min-width: 576px) {
   .title {

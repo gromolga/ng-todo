@@ -65,6 +65,12 @@ export class TodoComponent implements OnInit {
     this.todoList.push(todo);
   }
 
+  public todoUpdated(updatedTodo: ITodoItem) {
+    this.todoList = this.todoList.map((todo) => {
+      return todo.id === updatedTodo.id ? updatedTodo : todo
+    });
+  }
+
   public removeTodo(todo: ITodoItem) {
     this.todoStorage.remove(todo.id)
     .subscribe(() => {

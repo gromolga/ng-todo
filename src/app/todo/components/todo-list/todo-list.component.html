@@ -15,6 +15,9 @@
         [title]="todo.important ? 'Remove star' : 'Mark with a star'">
           <fa-icon [icon]="faStar"></fa-icon>
       </div>
+      <div class="task-block__item_edit" (click)="editTodoPopup(todo)">
+        <fa-icon [icon]="faEdit"></fa-icon>
+      </div>
       <div class="task-block__item_trash" 
         (click)="removeTodo.emit(todo)">
         <fa-icon [icon]="faTrash"></fa-icon>
@@ -22,3 +25,14 @@
     </div>
   </li>
 </ul>
+
+<app-modal *ngIf="editTodoPopupValue" (close)="closePopup()">
+  <h1>Edit <span (click)="closePopup()">X</span></h1>
+  <form action="">
+    <input type="text" [(ngModel)]="editTodoText" name="todo-text">
+    <div class="btn-layer">
+      <button type="button" class="btn btn-success btn-wth-margin" (click)="updateTodo()">Save</button>
+      <button type="button" class="btn btn-danger btn-wth-margin" (click)="closePopup()">Cancel</button>
+    </div>
+  </form>
+</app-modal>

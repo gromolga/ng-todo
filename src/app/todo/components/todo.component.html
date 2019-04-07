@@ -18,7 +18,8 @@
   [todoList]="uncompletedTodoList"
   (removeTodo)="removeTodo($event)"
   (completeToggle)="completeToggle($event)"
-  (starToggle)="starToggle($event)"></app-todo-list>
+  (starToggle)="starToggle($event)"
+  (todoUpdated)="todoUpdated($event)"></app-todo-list>
 
 <h3 class="header-small">
   <a href="#" class="header-small__link">Show ended tasks</a>

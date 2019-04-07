@@ -36,6 +36,15 @@ export class TodoStorageService {
     )
   }
 
+  public updateTodo(id: number, text: string) {
+    return this.httpClient
+    .patch("https://todo-api.grom-dev.kh.ua/api/todos/" + id, {
+      text
+    }).pipe(
+      map(this.mapTodo)
+    )
+  }
+
   public remove(id: Number): Observable<any> {
     return this.httpClient
     .delete("https://todo-api.grom-dev.kh.ua/api/todos/" + id)

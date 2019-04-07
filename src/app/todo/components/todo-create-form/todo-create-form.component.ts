@@ -9,8 +9,8 @@ import { TodoStorageService } from '../../services/todo-storage.service';
   templateUrl: './todo-create-form.component.html',
   styleUrls: ['./todo-create-form.component.scss']
 })
-export class TodoCreateFormComponent {
 
+export class TodoCreateFormComponent {
   public faCalendar = faCalendar;
   public faStar = faStar;
   public newTaskIconStatus:boolean = false;
